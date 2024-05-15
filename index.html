@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GROOT</title>
+    <link rel="icon" type="image/png" href="image/re_groot.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <link rel="stylesheet" href="style/home.css">
+    <link rel="stylesheet" href="style/choice.css">
+    <link rel="stylesheet" href="style/main_body.css">
+    <link rel="stylesheet" href="style/noti_opt.css">
+    <link rel="stylesheet" href="style/header.css">
+    <link rel="stylesheet" href="style/beautifier.css">
+    <link rel="stylesheet" href="style/converter.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+    <!-- <script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script> -->
+    <script>
+        
+        
+    </script>
+
+</head>
+
+<body>
+    <section class="header">
+        <div id="logo">
+            <img src="logo/groot1.svg">
+        </div>
+        <div id="nav_holder" tabindex="-1">
+            <div class="nav" id="set">
+                <p class="nav1">Create</p>
+            </div>
+            <div class="nav" id="project">
+                <p class="nav1">Projects</p>
+            </div>
+            <div class="nav" id="beautifier">
+                <p class="nav1">Beautifier</p>
+            </div>
+            <div class="nav" id="converter">
+                <p class="nav1">Converter</p>
+            </div>
+            <div class="nav" id="user"><img src="image/groot.png"></div>
+        </div>
+        <div id="menu_icon">
+            <div>
+                <img src="svgs/menu.svg">
+            </div>
+        </div>
+    </section>
+
+    <section class="main_body">
+
+        <div class="section_get_input_parent">
+
+            <div id="get_name">Project Name :<input type="text" value="Project 1" id="project_name"></div>
+
+            <div class="section_get_input" id="main">
+                <div class="sgi_first_div">
+                    <div>Field</div>
+                    <div>Type</div>
+                </div>
+                <!-- <input-custom-element></input-custom-element> -->
+
+            </div>
+            <div class="sgi_last_div">
+                <div class="ld_one">
+                    <div id="add_field" class="ld_box">
+                        <img src="svgs/plus.svg">
+                        ADD ANOTHER FIELD
+                        <div class="overlay"></div>
+                    </div>
+                    <div id="row_count">
+                        # Rows&nbsp;:
+                        <input type="number" id="get_row" value=1 class="ld_box">
+                    </div>
+                </div>
+                <div class="ld_two">
+                    <!-- <button type="button" id="gene" class="ld_box">GENERATE</button> -->
+                </div>
+            </div>
+            <div class="new_set ns1">Create New Set<img src="svgs/new_set.svg"></div>
+        </div>
+
+        <div id="object_viewer">
+            <textarea class="language-json" readonly="true" id="object_viewer1"></textarea>
+            <div id="div_ov">
+                <div>
+                    <p id="try">GROOTING . . .</p>
+                </div>
+                <!-- <copy-button></copy-button> -->
+            </div>
+            <div class="new_set ns2">Create New Set<img src="svgs/new_set.svg"></div>
+        </div>
+
+    </section>
+
+    <section class="project">
+        <div class="project_content">
+            <div class="pc_heading">
+                <p>Your Projects :</p>
+                <p id="pc_head_note">Only your structure get stored here <span>*</span></p>
+                <div class="search_bar">
+                    <img src="svgs/search.svg">
+                    <input type="text" id="project_search" placeholder="find type ...">
+                </div>
+            </div>
+            <div class="pc_project">
+
+            </div>
+
+        </div>
+        <div class="p_footer">
+            <p id="pf1"> " GROOT: Where your data dreams come true with a magic touch of structure and spontaneity! "
+            </p>
+            <p id="pf2"> " Where data dreams meet structure and spontaneity! "</p>
+        </div>
+    </section>
+
+    <section class="beautifier">
+        <div>
+            <div class="par_get_data">
+                <textarea class="get_data" placeholder="paste your JSON here"></textarea>
+                <select id="json_or_csv" class="b_class">
+                    <option value="0">
+                        JSON&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;>>
+                    </option>
+                    <option value="1">
+                        CSV&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;>>
+                    </option>
+                </select>
+            </div>
+            <textarea class="set_data" readonly="true" placeholder="get your beautified JSON"></textarea>
+        </div>
+        <div class="b_footer">
+            <!-- <p>" GROOT: Planting the seeds of mock data with a personalized touch, tailored to your defined structure ! "</p> -->
+            <!-- <p>"GROOT: Sculpting structured JSON mock data while beautifying your code effortlessly!"</p> -->
+            <p id="bf1">" GROOT: Where JSON beauty meets structure, effortlessly crafting and beautifying your mock data
+                garden ! "</p>
+            <p id="bf2">" GROOT: Crafting beautiful mock data with JSON elegance! "</p>
+            <button class="b_class" type="button" id="bity">BEAUTIFY >></button>
+        </div>
+    </section>
+
+    <section class="converter">
+        <div class="c_content">
+            <div class="choose_file">
+                <input type="file" id="file_getter" accept=".xml, .csv, .json">
+                <label for="file_getter" id="fileInputLabel"><img src="svgs/file.svg"> Choose Files . . .</label>
+                <p id="cf_info">Only files of type .csv , .xml , .json</p>
+                <div class="file_name">
+                    <h1>File Name :</h1>
+                    <h2 id="file_name">arrerfd.csv</h2>
+                </div>
+            </div>
+
+            <div class="convert_to">
+                <h1>Conver to : </h1>
+                <div>
+                    <div class="csv convert_to_cate">CSV</div>
+                    <div class="xml convert_to_cate">XML</div>
+                    <div class="json convert_to_cate">JSON</div>
+                </div>
+                <p>click to select<span>*</span></p>
+            </div>
+            <div class="convert_download">
+                <button type="button" id="convert_download">Convert & Download</button>
+            </div>
+        </div>
+        </div>
+        <div class="c_footer">
+            GROOT: Shape your structure, watch it bloom into formatted mock data.
+        </div>
+    </section>
+
+    <section class="choice_loader">
+        <section class="flex_cl">
+            <section class="cl_holder">
+
+                <div class="cl_holder_header">
+
+                    <div>
+                        Choose a Type
+                    </div>
+                    <div class="search_close">
+                        <div class="search_bar">
+                            <img src="svgs/search.svg">
+                            <input type="text" id="choice_search" placeholder="find type ...">
+                        </div>
+                        <img src="svgs/close.svg" id="close_choice_loader">
+                    </div>
+                </div>
+
+                <div class="cl_option">
+
+                    <div id="category">
+                    </div>
+                    <div id="options_holder">
+
+                    </div>
+
+                    <div id="additional_option_holder">
+                        <div id="first_div">
+                            <div class="set_data">
+                                <h2>Add Data &nbsp;:</h2>
+                                <div class="set_element_container">
+                                    <set-data-custom-element></set-data-custom-element>
+                                </div>
+                            </div>
+
+                            <div class="set_data_confirm">CONFIRM</div>
+                            <img src="svgs/info.svg" id="data_info">
+                        </div>
+                    </div>
+
+                    <div class="current_year">
+                        <div>
+                            <input type="checkbox" id="current_year_checkbox">
+                            CURRENT YEAR
+                        </div>
+                    </div>
+
+                    <section id="array_option_holder">
+                        <div class="array_main">
+                            <div class="left_arr_body">
+                                <h1>SET ARRAY OR OBJECT</h1>
+                                <div class="array_choice_holder" id="array_choice_holder">
+
+                                </div>
+                                <div id="confirm_arr_obj">
+                                    CONFIRM
+                                </div>
+                                <img src="svgs/info.svg" id="arr_opt_info">
+                            </div>
+                            <div class="right_arr_body">
+                            </div>
+
+                        </div>
+                    </section>
+            </section>
+        </section>
+    </section>
+
+    <section class="notify" tabindex="-1">
+        <div id="img_cont_alert_holder">
+            <!-- <div id="img_holder">
+                <img src="image/gni.jpeg">
+            </div> -->
+            <div id="cont_alert_holder">
+                <h1>ERROR : &nbsp;</h1>
+                <p>
+                    Either of the FIELD NAME OR THE CATEGORY IS NOT SET
+                </p>
+            </div>
+            <img src="svgs/close.svg" id="close_noti">
+        </div>
+    </section>
+
+    <section class="info" count=0 tabindex="-1">
+        <div class="info_container">
+            <img src="image/gni2.jpeg" id="image_info">
+            <div class="info_cont">
+            </div>
+            <div class="right_trig  lr_trig">
+                <div class="lr2">
+                    <img src="svgs/arrow.svg" alt=">">
+                </div>
+            </div>
+            <div class="left_trig lr_trig">
+                <div class="lr2">
+                    <img src="svgs/arrow.svg" alt=">">
+                </div>
+            </div>
+            <img src="svgs/close.svg" id="close_array_info">
+        </div>
+    </section>
+
+    <section class="yes_no">
+        <div id="ask_yes_no">
+            <div class="ques">
+            </div>
+            <div class="ans_button">
+                <button id="no" type="button">NO</button>
+                <button id="yes" type="button">YES</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="user_dis">
+        <div>
+            <div id="back"><img src="svgs/arrow.svg" id="back_from_user">
+                <p>Profile</p>
+            </div>
+            <div class="super_parent">
+                <img src="image/groot.png">
+                <h5 id="name_set">Arul</h5>
+                <p id="email_set">arul@gmail.com</p>
+            </div>
+            <img src="logo/pr3.svg" id="pr">
+            <button id="log_out" type="button">LOG OUT</button>
+        </div>
+    </section>
+
+    <section class="footer">
+        <button type="button" id="save_structure">SAVE STRUCTURE</button>
+        <button type="button" id="generate"> GENERATE DATA </button>
+        <button type="button" id="download">DOWNLOAD DATA</button>
+    </section>
+
+    <script src="login_signup/init.js" defer></script>
+    <script src="firebase/connect.js" defer></script>
+
+
+    <!-- custom elements source-->
+    <script src="custom_elements/input_custom.js" defer></script>
+    <script src="custom_elements/set_data_custom.js" defer></script>
+    <script src="custom_elements/choose_custom.js" defer></script>
+    <script src="custom_elements/array_opt_custom.js" defer></script>
+    <script src="custom_elements/copy_custom.js" defer></script>
+
+
+    <!-- script source -->
+    <script src="script/simple_things.js" defer></script>
+    <script src="script/options_assigner.js" defer></script>
+    <script src="script/iterator.js" defer></script>
+    <script src="script/array_assigner.js" defer></script>
+    <script src="script/drag.js" defer></script>
+    <script src="script/info.js" defer></script>
+    <script src="script/beatify.js" defer></script>
+    <script src="script/header.js" defer></script>
+    <script src="script/converter.js" defer></script>
+    <script src="script/projects.js" defer></script>
+
+    <!-- firebase -->
+    <script src="script/initial.js" defer></script>
+
+
+    <!-- storage and calling api -->
+    <script src="store_call/MNC.js"></script>
+    <script src="store_call/other.js"></script>
+    <script src="store_call/banking.js"></script>
+    <script src="store_call/nature.js"></script>
+    <script src="store_call/transport.js"></script>
+    <script src="store_call/api.js"></script>
+    <script src="store_call/names.js"></script>
+    <script src="store_call/place.js"></script>
+
+
+
+</body>
+
+</html>

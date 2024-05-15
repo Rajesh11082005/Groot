@@ -1,0 +1,200 @@
+    <input type="number">
+    <button type="button" id="submit">SUBMIT</button>
+
+    <script>
+        let inp = document.querySelector("input");
+        let submit = document.getElementById("submit");
+
+        submit.addEventListener("click",caller);
+
+        async function caller(){
+            let num = inp.value;
+            let a = await fetch(`https://randomuser.me/api/?results=${num}`);
+            if(a.ok){
+                let b = await a.json();
+
+                console.log(b);
+            }
+           
+        }
+    </script>
+
+
+
+    & > div{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+        position: relative;
+        border: 2px solid red;
+
+        .set_data_confirm{
+            position: absolute;
+            text-align: center;
+            height: 50px;
+            line-height: 100%;
+            bottom: 0;
+            right: 0;
+            margin: 8px;
+            padding: 15px 20px;
+            font-size: 1.2rem;
+            color:var(--color4);
+            background-color: var(--color6);
+            border-radius: 10px;
+            border: 2px solid var(--color2);
+            transition: .2s;
+            /* display: none; */
+        }
+        .set_data_confirm:hover{
+            background-color: rgba(255,255,255,.2);
+        }
+        .set_data_confirm:active{
+            scale: calc(.9);
+        }
+    }
+
+
+
+.set_data{
+    color:var(--color4);
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+    padding-top:20px;
+    padding-left: 30px;
+    position: absolute;
+    border: 2px solid orange;
+    
+    h2{
+        align-self: self-start;
+        padding: 0 10px 0 25px;
+    }
+
+    .set_element_conatainer{
+        height: 100%;
+        width: 98%;
+        padding-top: 16px;
+        overflow-y: scroll;
+        scrollbar-width: none;
+    }
+    .set_element_conatainer::-webkit-scrollbar{
+        display: none;
+    }
+}
+
+
+json
+
+
+function value_adder_from_choice(d) {
+    // console.log(triggering_ele.getRootNode().host);
+    
+    parent = d.getRootNode().host;
+    let value ='';
+
+    OPTION_HOLDER.addEventListener("click", (event) => {
+
+        if (event.target.nodeName == 'CHOOSE-CUSTOM-ELEMENT') {
+           
+            if (!event.target.clickHandler) {
+
+                // event.target.clickHandler = (event) => {
+                //     console.log(event.target);
+                // };
+                event.target.addEventListener("click", this.clickHandler);
+                value = event.target.getAttribute("value");
+                parent.setAttribute("value",value);
+                console.log(value)
+            }
+            else{
+                value = event.target.getAttribute("value");
+
+                parent.setAttribute("value",value);
+            }
+
+            CHOICE_CLOSER.click();
+            
+        }
+
+    });
+}
+
+
+
+
+
+ 
+
+            // Create a new MutationObserver
+            // const observer = new MutationObserver(mutationsList => {
+            //     mutationsList.forEach(mutation => {
+            //         if (mutation.type === 'attributes') {
+            //             // Attribute change detected
+            //             // console.log('Attribute changed:', mutation.attributeName);
+            //             if(mutation.attributeName=="value"){
+            //                 this.Value = choice_selector.getAttribute("value")
+            //             }
+            //         }
+            //     });
+            // });
+
+            // // Configure the observer to watch for attribute changes
+            // const config = { attributes: true };
+            // observer.observe(choice_selector, config);
+
+
+
+ /* .array_option{
+            font-size: 1.3rem;
+            padding-left: 10px;
+            text-transform: capitalize;
+            color: var(--color4);
+            transition: .1s;
+            justify-content: space-between;
+
+            .min_max{
+                display: none;
+                margin-left: 8px;
+
+                div{
+                    display: flex;
+                    align-items: center;
+                }
+
+                div > input{
+                    display: block-inline;
+                    height: 35px;
+                    width: 70px;
+                    outline:none;
+                    margin-inline-end: 10px;
+                    border-radius: 8px;
+                    padding-inline: 10px;
+                    font-size: 1.1rem;
+                    border: 2px solid var(--color4);
+                    background-color: var(--color2);
+                    color: var(--color4);
+                }
+                div > input:hover {
+                    border: 2px solid #52a552;
+                }
+                div >input::-webkit-inner-spin-button,
+                div > input::-webkit-outer-spin-button {
+                     -webkit-appearance: none;
+                     appearance: none;
+                      margin: 0;
+                      display: none;
+                }
+                 
+                
+            }
+
+            
+            img{
+                padding: 5px;
+                padding-right: 10px;
+                display: none;
+            }
+        } */

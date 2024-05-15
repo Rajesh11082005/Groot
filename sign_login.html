@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GROOT SIGN-UP | LOGIN</title>
+    <link rel="icon" type="image/png" href="image re_groot.png">
+    <link rel="stylesheet" href="login_signup/style.css">
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <section class="main">
+        <div class="ls_left">
+            <img src="logo/logo4.svg">
+            <div class="para_loader">
+                <h1>GROOT <img src="logo/circle.svg"></h1>
+                <p id="blink_content"></p>
+            </div>
+        </div>
+        <div class="ls_right">
+            <div class="sign_login" state="signup">
+                <h1>Get Started </h1>
+                <div class="inp_p name_p"><input type="text" class="inp" placeholder="Enter name" id="name"><img
+                        src="svgs/username.svg" class="ls_icons"></div>
+                <div class="inp_p email_p"><input type="email" class="inp" placeholder="Enter Email" id="email"><img
+                        src="svgs/email.svg" class="ls_icons"></div>
+                <div class="inp_p pass1_p"><input type="password" class="inp" placeholder="Enter password" id="pass1">
+                    <p id="info_pass">password-length >= 8 <span>*</span></p><img src="svgs/hide_pass.svg" tabindex="-1"
+                        class="ls_icons show_hide_pass">
+                </div>
+                <div class="inp_p pass2_p"><input type="password" class="inp" placeholder="Confirm password"
+                        id="pass2"><img src="svgs/hide_pass.svg" class="ls_icons show_hide_pass" tabindex="-1"></div>
+                <button type="button" id="signup_login_button">Sign Up</button>
+
+                <div class="sl_foot">
+                    <p> Already have an account ?</p>&nbsp;&nbsp; <span id="ls_trig">Log in.</span>
+                </div>
+            </div>
+
+            <!-- <img id="ls_bottom_img"  src="logo/groot.svg"> -->
+
+        </div>
+
+    </section>
+    <script src="login_signup/init.js" defer></script>
+    <script src="login_signup/script.js" defer></script>
+    <script src="firebase/connect.js" defer></script>
+
+    <script>
+        const contentArray = [
+            "Where Mock Data Comes to Life!",
+            "Simplifying Mock Data Generation.",
+            "Powering Development Effortlessly.",
+            "Your Data, Your Way.",
+            "Elevating Your Development Experience.",
+            "Empowering Developers Worldwide.",
+            "Transforming Mock Data into Magic.",
+            "Where Innovation Meets Simulation.",
+            "Fueling Development with Simplicity.",
+            "Your Ultimate Mock Data Solution.",
+        ];
+
+        let currentIndex = 0;
+        let typingTimeout;
+        let blinkContent = document.getElementById("blink_content");
+        //let signUpButton = document.getElementById("sign_up");
+
+        function typeContent(index) {
+            let content = contentArray[index];
+            let contentIndex = 0;
+
+            typingTimeout = setInterval(() => {
+                if (contentIndex < content.length) {
+                    blinkContent.textContent += content.charAt(contentIndex);
+                    contentIndex++;
+                } else {
+                    clearInterval(typingTimeout);
+                    setTimeout(() => {
+                        blinkContent.textContent = "";
+                        currentIndex = (currentIndex + 1) % contentArray.length;
+                        typeContent(currentIndex);
+                    }, 2000);
+                }
+            }, 100);
+        }
+
+
+        typeContent(currentIndex);
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            signOut();
+        });
+    
+    </script>
+</body>
+
+</html>

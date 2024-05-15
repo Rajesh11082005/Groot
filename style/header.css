@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Hind+Siliguri:wght@300&family=Inter:wght@100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Rajdhani&family=Rock+3D&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+
+.header{
+    display: flex;
+    
+    *{
+        /* font-family: "Caveat Brush", cursive; */
+    }
+
+
+    #logo{
+        flex-grow: 1;
+        height: 100%;
+        /* border: 2px solid red; */
+        font-size: 2rem;
+        display: flex;
+        align-items: center;
+        padding-left: 4rem;
+
+        img{
+            height: 100px;
+        }
+    }
+    #nav_holder{
+        color: var(--color4);
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+    #menu_icon{
+        height: 100%;
+        width: 80px;
+        padding-right: 10px;
+       
+        display: none;
+
+        div{
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    
+
+        img{
+            height: 80%;
+            width: 80%;
+            padding-bottom: 5px;
+            /* border: 2px solid red; */
+        }
+    }
+}
+
+#nav_holder{
+
+    /* padding-right: 9rem; */
+
+    .nav1{
+        position: relative;
+        /* border: 2px solid red; */
+    }
+    
+    .nav2::after{
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        /* width: 125%; */
+        border: 1px solid #6c5a44;
+        border-radius: 20px;
+        right: -15px;
+        opacity: 1;
+        transition: .3s;
+        animation: slideFromRight 0.3s ease-in-out forwards; /* Apply animation */
+    }
+
+    .nav2::before{
+        content: ""; 
+        display: inline-block;
+        /* width: 25px;  */
+        /* height: 25px; */
+        background-image: url("../svgs/leaf.svg"); 
+        background-size: cover;
+        margin-right: 10px; 
+        position: absolute;
+        right : -35px;
+        top: -5px;
+        opacity: 1;
+        transition: .2s;
+        animation: slideFromBottom 0.2s ease-in-out forwards; /* Apply animation */
+
+    }
+
+    /* .nav1::after,.nav1::before{
+        opacity: 0;
+    } */
+
+    .nav1:hover::after{
+        width: 125%;
+        opacity: 1;
+    }
+
+    .nav1:hover::before{
+        opacity: 1;
+    }
+
+    .nav{
+        height: 100%;
+        padding-inline: 30px;
+        font-size: 1.4rem;
+        display: flex;
+        align-items: center;
+    }
+
+
+    #user{
+        /* border: 2px solid red; */
+        padding-left: 4.5rem;
+        
+
+        img{
+            height: 60px;
+            width: 60px;
+            /* object-fit: cover; */
+            border-radius: 100%;
+        
+
+        }
+    }
+}
+
+@keyframes slideFromRight {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 125%;
+    }
+}
+
+@keyframes slideFromBottom {
+    0% {
+        width: 0;
+        height: 0;
+    }
+    100% {
+        width: 25px;
+        height: 25px;
+    }
+}
+
+@media screen and (max-width: 800px){
+    .header{
+        position: relative;
+
+        #menu_icon{
+            display: block;
+        }
+
+        #logo{
+            padding-left: 1rem;
+
+            img{
+                height: 80px;
+            }
+        }
+        #nav_holder{
+            flex-direction: column;
+            position: absolute;
+            right: -100%;
+            top: 100%;
+            height: fit-content;
+            z-index: 6;
+            padding-right: 0;
+            transition: .2s;
+
+            .nav{
+                background-color: var(--color2);
+                width: 100%;
+                padding-block: 10px;
+                font-size: 1.3rem;
+
+                .nav1{
+                    border: none;
+                }
+            }
+            #set{
+                padding-top: 20px;
+            }
+            #set,#project,#beautifier,#converter{
+                border-bottom:1px solid var(--color3);
+            }
+            #user{
+                /* border: 2px solid red; */
+                padding-left: 1.2rem;
+                padding-bottom: .7rem;
+                border-bottom-left-radius: 30px;
+
+                img{
+                    height: 50px;
+                    width: 50px;
+                }
+            }
+            #user::after{
+                content: "User";
+                padding-left: 10px;
+            }
+        }
+    }
+}

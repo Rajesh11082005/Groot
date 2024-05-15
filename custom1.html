@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script> -->
+    <script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script>
+    <!-- Add this script tag to include SortableJS library -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script> -->
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Rajdhani&display=swap');
+
+        :root{
+            --color1 :#52a552;
+            --color2 :#424242;
+            --color3 :#818181;
+            --color4 :#ffffff;
+            --color5 :#19857b;
+            --color6 :#303030;
+            --color7 :#656565;
+        }
+
+        body,
+        html {
+            height: 100%;
+            width: 100%;
+        }
+
+        * {
+            padding: 0%;
+            margin: 0%;
+            box-sizing: border-box;
+            font-family: "Josefin Sans", sans-serif;
+        }
+
+        body {
+            background-color: #424242;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #main {
+            height: fit-content;
+            min-height: 400px;
+            width: 100%;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+
+
+            &>* {
+                margin-block: 10px;
+            }
+        }
+
+        .display_flex {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .col {
+            display: flex;
+            /*justify-content: space-evenly;*/
+            align-items: center;
+            width: 100%;
+            height: 70px;
+            background-color: #424242;
+            padding: 10px;
+
+            .choices {
+                position: relative;
+                /*justify-content: space-between;*/
+                color: #9f9f9f;
+                overflow: scroll;
+                scrollbar-width: none;
+
+
+
+
+                .overlay {
+                    height: 100%;
+                    width: 100%;
+                    background-color: red;
+                    left: 0;
+                    position: absolute;
+                    border-radius: 8px;
+                    background-color: rgba(255, 252, 252, 0.2);
+                    display: none;
+                }
+
+                img {
+                    width: fit-content;
+                    margin-left: 40px;
+                    background-color: #424242;
+                }
+            }
+
+            .choices::-webkit-scrollbar {
+                display: none;
+            }
+
+            .choices:hover {
+                border: none;
+
+                .overlay {
+                    display: block;
+                }
+            }
+
+            #name_field {
+                outline: none;
+                border: none;
+                border: 1.4px solid #818181;
+            }
+
+            #name_field:hover {
+                border: 2px solid white;
+            }
+
+            #name_field:focus {
+                border: 2px solid #52a552;
+            }
+
+            &>img {
+                height: 30px;
+                width: 30px;
+            }
+
+            #dragger {
+                cursor: s-resize;
+            }
+
+
+        }
+
+        .col>* {
+            margin-inline: 10px;
+        }
+
+        .structure {
+            height: 40px;
+            width: 200px;
+            background-color: transparent;
+            border: 1.4px solid #818181;
+            border-radius: 8px;
+            font-size: 1.08rem;
+            color: white;
+            padding: 10px;
+        }
+
+        input-custom-element.dragging {
+
+            border: 1px solid gray;
+            opacity: 0;
+        }
+
+        input-custom-element {
+            width: 100%;
+            display: block;
+        }
+
+        @media screen and (max-width: 600px) {}
+    </style>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300&family=Inter:wght@100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Rajdhani&display=swap');
+
+        :root{
+            --color1 :#52a552;
+            --color2 :#424242;
+            --color3 :#818181;
+            --color4 :#ffffff;
+            --color5 :#19857b;
+            --color6 :#303030;
+            --color7:#656565;
+        }
+        .ch_container{
+            height: 120px;
+            width: 260px;
+            border-radius: 10px;
+            background-color: rgb(97, 94, 94);
+            transition: .1s;
+            font-family: "Inter", sans-serif;
+
+            h3{
+                height: 25%;
+                width: 100%;
+                color: white;
+                display: flex;
+                align-items: center;
+                padding-inline: 10px;
+                padding-top: 7px;
+                font-family: "Inter", sans-serif;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            p{
+                font-style: italic;
+                height: 75%;
+                width: 100%;
+                padding: 12px;
+                padding-top: 5px;
+                font-size: .9rem;
+                line-height: 1.4rem;
+                font-family: "Inter", sans-serif;
+                color:#e9e7e7;
+                overflow-y: scroll;
+                scrollbar-width: none;
+            }
+            p::-webkit-scrollbar{
+                display: none;
+            }
+        }
+        .ch_container:hover{
+            background-color: var(--color2);
+        }
+        @media screen and (max-width: 600px) {
+            .ch_container{
+                height: 110px;
+                width: 230px;
+            }
+        }
+    </style>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Rajdhani&display=swap');
+
+        :root{
+            --color1 :#52a552;
+            --color2 :#424242;
+            --color3 :#818181;
+            --color4 :#ffffff;
+            --color5 :#19857b;
+            --color6 :#303030;
+            --color7 :#656565;
+        }
+
+
+        * {
+            padding: 0%;
+            margin: 0%;
+            box-sizing: border-box;
+            font-family: "Josefin Sans", sans-serif;
+        }
+        #cate{
+            margin-top: 30px;
+            height: 500px;
+            width: 170px;
+            background-color: #303030;
+        }
+        .cate{
+            width: 100%;
+            height: 44px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+
+            .name{
+                text-transform: capitalize;
+                font-size: 1.4rem;
+                flex-grow: 1;
+                padding-inline:8px ;
+                display: flex;
+                align-items: center;
+            }
+            .count{
+                height: 100%;
+                width: fit-content;
+                display: flex;
+                align-items: center;
+                padding-inline: 6px;
+            }
+        }
+        .cate:hover{
+            background-color: var(--color2);
+            border-left: 4px solid var(--color5);
+        }
+    </style>
+    <style>
+        .right_arr_body{
+            height: 100%;
+            width: 22%;
+            background-color: var(--color7);
+    
+            .box{
+                height: 45px;
+                /* border: 2px solid red; */
+                display: flex;
+                align-items: center;
+            }
+            .array_title{
+                background-color: var(--color1);
+                color: var(--color4);
+                font-size: 1.2rem;
+                padding-left: 10px;
+                font-weight: bolder;
+                text-transform: uppercase;
+            }
+            .array_option{
+                font-size: 1.3rem;
+                padding-left: 10px;
+                text-transform: capitalize;
+                color: var(--color4);
+                transition: .1s;
+                justify-content: space-between;
+    
+                .min_max{
+                    /*display: none;*/
+                    margin-left: 8px;
+    
+                    div{
+                        display: flex;
+                        align-items: center;
+                    }
+    
+                    div > input{
+                        display: block-inline;
+                        height: 35px;
+                        width: 70px;
+                        outline:none;
+                        margin-inline-end: 10px;
+                        border-radius: 8px;
+                        padding-inline: 10px;
+                        font-size: 1.1rem;
+                        border: 2px solid var(--color4);
+                        background-color: var(--color2);
+                        color: var(--color4);
+                    }
+                    div > input:hover {
+                        border: 2px solid #52a552;
+                    }
+                    div >input::-webkit-inner-spin-button,
+                    div > input::-webkit-outer-spin-button {
+                         -webkit-appearance: none;
+                         appearance: none;
+                          margin: 0;
+                          display: none;
+                    }
+                     
+                    
+                }
+    
+                
+                img{
+                    padding: 5px;
+                    padding-right: 10px;
+                   /* display: none;*/
+                }
+            }
+            .array_option:hover{
+                background-color: #303030;
+            }
+        }
+        .d_ele{
+            height: 400px;
+            width: 800px;
+            border: 2px solid red;
+        }
+    
+    </style>
+</head>
+<body>
+    <div id="main">
+        <!-- <div class="col">
+            <img id="dragger" src="dragger.svg">
+            <input type="text" class="display_flex structure" id="name_field">
+            <div class="choices structure display_flex">
+                choose type ...
+                <img src="svgs/uda.svg">
+                <div class="overlay">
+
+                </div>
+            </div> 
+            <img id="close" src="svgs/close.svg">
+        </div> -->
+
+
+        <input-custom-element value="" class="item" style="border: 2px solid red;"></input-custom-element>
+        <input-custom-element value="" class="item" style="border: 2px solid blue;"></input-custom-element>
+        <input-custom-element value="" class="item" style="border: 2px solid orange;"></input-custom-element>
+        <input-custom-element value="" class="item" style="border: 2px solid green;"></input-custom-element>
+
+        <choose-custom-element header="Character Sequence" content=" Create simple sequence of characters , digit and symbols."></choose-custom-element>
+
+        <category-custom-element></category-custom-element>
+<!-- 
+        <div class="ch_container">
+            <h3>Character Sequence</h3>
+            <p>
+                Create simple sequence of characters , digit and symbols.
+            </p>
+        </div>
+
+        <div id="cate">
+
+            <div class="cate">
+                <div class="name">
+                    All
+                </div>
+                <div class="count">
+                    45343
+                </div>
+            </div>
+
+            <category-custom-element name="Alll" count="234234" key_name=""></category-custom-element>
+        </div> -->
+
+        <div class="right_arr_body">
+            <div class="array_title box">
+                USER
+            </div>
+            <div class="array_option box">
+                Name
+                <div class="min_max">
+                    <div>
+                    <input type="number" id="arr_min" placeholder="min">
+                    <input type="number" id="arr_max" placeholder="max">
+                    <input type="number" id="arr_count" placeholder="count">
+                </div>
+                </div>
+                <img src="svgs/close.svg">
+            </div>
+            <br>
+            <br>
+            <br>
+        </div>
+
+        <div class="d_ele">
+
+        </div>
+
+        <array-option-custom-element draggable="true" name="Name" value="" extra="" min_max_state=true  close_state=true count_state=true></array-option-custom-element>
+
+    </div>
+
+
+    <script>
+        let arr_opt_template = document.createElement("template");
+        arr_opt_template.innerHTML = `
+        <style>
+            .array_option{
+                font-size: 1.3rem;
+                padding: 10px;
+                text-transform: capitalize;
+                color: var(--color4);
+                transition: .1s;
+                justify-content: space-between;
+                border:2px solid red;
+                background-color:var(--color7);
+                display:flex;
+                align-items:center;
+
+                p{
+                    font-size:1.6rem;
+                    padding-inline:10px;
+                }
+    
+                .min_max{
+                    //display: none;
+                    margin-inline: 5px;
+    
+                    div{
+                        display: flex;
+                        align-items: center;
+                    }
+   
+                }
+
+                input{
+                    display: block-inline;
+                    height: 30px;
+                    width: 70px;
+                    outline:none;
+                    margin-inline-end: 10px;
+                    border-radius: 8px;
+                    padding-inline: 10px;
+                    font-size: 1.1rem;
+                    border: 2px solid var(--color4);
+                    background-color: var(--color2);
+                    color: var(--color4);
+                }
+                input:hover {
+                    border: 2px solid #52a552;
+                }
+                input::-webkit-inner-spin-button,
+                input::-webkit-outer-spin-button {
+                     -webkit-appearance: none;
+                     appearance: none;
+                      margin: 0;
+                      display: none;
+                }
+    
+                
+                img{
+                    padding: 5px;
+                    padding-right: 10px;
+                    display: none;
+                }
+            }
+            .array_option:hover{
+                background-color: #303030;
+            }
+            .red{
+                color:red;
+                border:2px solid red;
+            }
+        </style>
+        <div class="array_option box">
+            <p>Name</p>
+            <div class="min_max">
+                <div>
+                <input type="number" id="arr_min" placeholder="min" value=0>
+                <input type="number" id="arr_max" placeholder="max">
+            </div>
+            </div>
+            <input type="number" id="arr_count" placeholder="count" value=1 title="count">
+            <img src="svgs/close.svg" id="arr_close">
+        </div>        
+        `
+
+        class arrayOptionCustomElement extends HTMLElement{
+             
+            constructor(){
+                super();
+                this.shadow = this.attachShadow({mode:"closed"});
+            }
+
+            connectedCallback(){
+                let clone = arr_opt_template.content.cloneNode(true);
+                this.shadow.append(clone);
+
+                const ARRAY_OPTION = this.shadow.querySelector(".array_option");
+                const ARR_MIN = this.shadow.getElementById("arr_min");
+                const ARR_MAX = this.shadow.getElementById("arr_max");
+                const ARR_COUNT = this.shadow.getElementById("arr_count");
+                const ARR_CLOSE = this.shadow.getElementById("arr_close");
+
+                if(this.hasAttribute("name")){
+                    this.Name = this.Name;
+                }
+
+                if(this.hasAttribute("min_max_state")){
+                    this.Min_Max_State = this.Min_Max_State;
+                }
+                if(this.hasAttribute("count_state")){
+                    this.Count_State = this.Count_State;
+                }
+                if(this.hasAttribute("close_state")){
+                    this.Close_State = this.Close_State;
+                }
+
+                ARR_CLOSE.addEventListener("click",()=>{
+                    this.remove();
+                });
+
+                ARR_MIN.addEventListener("input",()=>{
+                    this.extra_array_setter(ARR_MIN,ARR_MAX);
+                    if(this.checker_min_max(ARR_MIN,ARR_MAX)){
+                        ARR_MAX.style.color="red";
+                        ARR_MAX.style.border="red";
+                     
+                   }
+                   else{
+                       ARR_MAX.style.color="";
+                       ARR_MAX.style.border="";
+                   }
+                });
+
+                ARR_MAX.addEventListener("input",(event)=>{
+                    this.extra_array_setter(ARR_MIN,ARR_MAX);
+                    if(this.checker_min_max(ARR_MIN,ARR_MAX)){
+                        event.target.style.color="red";
+                        event.target.style.border="red";
+                     
+                   }
+                   else{
+                       event.target.style.color="";
+                       event.target.style.border="";
+                   }
+                })
+
+                console.log(ARR_MIN);
+
+
+                ARR_COUNT.addEventListener("keydown",this.check_prevent_def);
+                ARR_MIN.addEventListener("keydown",this.check_prevent_def);
+                ARR_MAX.addEventListener("keydown",this.check_prevent_def);
+
+            };
+
+            checker_min_max(MIN,MAX){
+                let min_v = parseInt(MIN.value);
+                let max_v = parseInt(MAX.value);
+        
+                if(max_v<min_v || min_v==max_v){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+
+            extra_array_setter(MIN,MAX){
+                let min_v = MIN.value;
+                let max_v = MAX.value;
+
+                let arr = [min_v,max_v];
+                this.Extra = arr;
+            }
+
+            check_prevent_def(event) {
+                    if (event.key === 'e' || event.key === 'E' || event.key === '+' || event.key === '-') {
+                        event.preventDefault();
+                    }
+            };
+
+            get Name(){
+                return this.getAttribute("name");
+            }
+            set Name(value){
+                let ele = this.shadow.querySelector("p");
+                ele.textContent = value;
+            }
+
+            get Extra(){
+                return this.getAttribute("extra");
+            }
+            set Extra(value){
+                this.setAttribute("extra",value);
+            }
+
+            get Min_Max_State(){
+                return this.getAttribute("min_max_state")
+            }
+            set Min_Max_State(value){
+                console.log(value);
+                let ele = this.shadow.querySelector(".min_max");
+
+                if(value=="true"){
+                    ele.style.display="block";
+                }
+                else{
+                    ele.style.display="none";
+                }
+            }
+            get Close_State(){
+                return this.getAttribute("close_state");
+            }
+            set Close_State(value){
+                let ele = this.shadow.getElementById("arr_close");
+                if(value=="true"){
+                    ele.style.display="block";
+                }
+                else{
+                    ele.style.display="none";
+                }
+            }
+            get Count_State(){
+                return this.getAttribute("count_state");
+            }
+            set Count_State(value){
+                let ele = this.shadow.getElementById("arr_count");
+                if(value=="true"){
+                    ele.style.display="block";
+                }
+                else{
+                    ele.style.display="none";
+                }
+            }
+        }
+
+       
+
+        customElements.define("array-option-custom-element",arrayOptionCustomElement);
+
+
+    </script>
+
+    <script>
+        let template = document.createElement("template");
+        template.innerHTML = `
+        <style>
+
+            *{
+                padding:0;
+                margin:0;
+                box-sizing:border-box;
+            }
+            .display_flex{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .col{
+                display: flex;
+                /*justify-content: space-evenly;*/
+                align-items: center;
+                width: 100%;
+                height: 70px;
+                background-color:#424242;
+                padding: 10px;
+                will-change: transform;
+
+                & > div {
+
+                    display:flex;
+                    align-items:center;
+
+                    & > *{
+                        margin-inline: 10px;
+                    }
+
+                    .choices{
+                        position: relative;
+                        justify-content: space-between;
+                        color: #9f9f9f;
+                        scrollbar-width: none;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        transition:.3s;
+                       
+                        .overlay{
+                            height: 100%;
+                            width: 100%;
+                            background-color: red;
+                            left: 0;
+                            position: absolute;
+                            border-radius: 8px;
+                            background-color: rgba(255, 252, 252, 0.2);
+                            display: none;
+                        }
+                        img{
+                            width: fit-content;
+                            background-color:#424242;
+                        }
+                    }
+        
+                    .choices::-webkit-scrollbar{
+                        display: none;
+                    }
+        
+                    .choices:hover{
+                        border: none;
+                      
+                       .overlay{
+                        display: block;
+                       }
+                    }
+        
+                    #name_field{
+                        outline: none;
+                        border: none;
+                        border: 1.4px solid #818181;
+                        font-family: "Josefin Sans", sans-serif;
+                        transition:.4s;
+                    }
+                    #name_field:hover{
+                        border: 2px solid white;
+                    }
+                    #name_field:focus{
+                        border: 2px solid #52a552;
+                    }
+        
+                    & > img{
+                        height: 30px;
+                        width: 30px;
+                    }
+        
+
+                }
+    
+                
+               #dragger{
+                  cursor: s-resize;
+               }
+               
+              
+            }
+           
+            .structure{
+                height: 40px;
+                width: 220px;
+                background-color: transparent;
+                border: 1.4px solid #818181;
+                border-radius: 8px;
+                font-size: 1.3rem;
+                color: white;
+                padding: 10px;
+            }
+    
+            input-custom-element.dragging :where(img,div){
+                opacity: 0;
+            }
+    
+            .error{
+                border:2px solid red;
+                color:red;
+            }
+            @media screen and (max-width: 600px) {
+                .structure{
+                    width: 180px;
+                }
+            }
+            @media screen and (max-width: 380px) {
+                .structure{
+                    width:150px;
+                }
+            }
+        </style>
+
+           
+            <div class="col" >
+                <img id="dragger"  class="dragger" draggable=false src="svgs/dragger.svg" >
+                <div draggable=true>;
+                <input type="text" placeholder="Enter key" class="display_flex structure" id="name_field">
+                <div class="choices structure display_flex">
+                    choose type ...
+                    <img src="svgs/uda.svg">
+                    <div class="overlay">
+    
+                    </div>
+                </div> 
+                <img id="close" class="close" src="svgs/close.svg">
+            </div>
+            </div>
+        
+
+        `
+
+        class customInputClass extends HTMLElement {
+
+            static get observedAttributes() {
+                return ["name", "value"];
+            }
+
+            constructor() {
+                super();
+                this.shadow = this.attachShadow({ mode: "closed" });
+            }
+            connectedCallback() {
+                let clone = template.content.cloneNode(true);
+                this.shadow.append(clone);
+
+
+                if (this.Name) {
+                    this.Name = "";
+                }
+
+                this.addEventListener("dragstart",{})
+
+                let input_ele = this.shadow.querySelector("input");
+                let input_close = this.shadow.querySelectorAll(".close");
+                let x_media_query = window.matchMedia("(max-width: 450px)");
+
+
+
+                input_ele.addEventListener("input", (event) => {
+                    let text = event.target.value
+                    this.Name = text;
+
+                    this.checker_name(text, this);
+                })
+
+                input_close.forEach((ele) => {
+                    ele.addEventListener("click", (event) => {
+                        console.log(this.remove());
+                        // console.log(document.querySelector("body").removeChild(event.target.parentNode.parentNode))
+                    })
+                })
+
+                x_media_query.addEventListener("change", (ev) => {
+                    let ele = this.shadow.querySelector(".choices");
+                    if (ev.matches) {
+                        ele.firstChild.data = "";
+                        ele.style.justifyContent = "center";
+                        ele.querySelector("img").setAttribute("src", "svgs/ch_type1.svg");
+                    }
+                    else {
+                        ele.firstChild.data = "choose type ...";
+                        ele.style.justifyContent = "space-between";
+                        ele.querySelector("img").setAttribute("src", "svgs/uda.svg");
+                    }
+                });
+
+              
+            }
+
+            attributeChangedCallback(attr, old_v, new_v) {
+
+            }
+
+            checker_name(text, targeted_ele) {
+
+                let arr = [...document.querySelectorAll("input-custom-element")];
+                let arr_v = arr.map(input => input.getAttribute("name"));
+
+                let index = arr.indexOf(targeted_ele);
+                arr_v.splice(index, 1)
+
+                if (arr_v.includes(text) && text != "") {
+                    this.shadow.querySelector("input").style.border = "2px solid red"
+                    this.shadow.querySelector("input").style.color = "red"
+                }
+                else {
+                    this.shadow.querySelector("input").removeAttribute("style")
+                }
+
+
+
+            }
+
+            set Name(value) {
+                this.setAttribute("name", value);
+            }
+
+            get Name() {
+                return this.getAttribute("name");
+            }
+
+            set Value(value) {
+                this.setAttribute("value", value);
+            }
+            get Value() {
+                return this.getAttribute("value");
+            }
+        }
+
+
+        function notify() {
+            console.log("hii notify ")
+        }
+        customElements.define('input-custom-element', customInputClass);
+
+    </script>
+    <!-- <script>
+        let main = document.getElementById("main");
+        var sortable = Sortable.create(main,{
+            sort:true,
+            animation:150,
+            handle:".item"
+        });
+
+    </script> -->
+    <script>
+        let cust_template = document.createElement("template");
+        cust_template.innerHTML=`
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300&family=Inter:wght@100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Rajdhani&display=swap');
+    
+            * {
+                padding: 0%;
+                margin: 0%;
+                box-sizing: border-box;
+                
+            }
+            :root{
+                --color1 :#52a552;
+                --color2 :#424242;
+                --color3 :#818181;
+                --color4 :#ffffff;
+                --color5 :#19857b;
+                --color6 :#303030;
+                --color7:#656565;
+            }
+            .ch_container{
+                height: 120px;
+                width: 260px;
+                border-radius: 10px;
+                background-color: var(--color7);
+                transition: .1s;
+                font-family: "Inter", sans-serif;
+            
+                h3{
+                    height: 25%;
+                    width: 100%;
+                    color: white;
+                    display: flex;
+                    align-items: center;
+                    padding-inline: 10px;
+                    padding-top: 7px;
+                    font-family: "Inter", sans-serif;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                p{
+                    font-style: italic;
+                    height: 75%;
+                    width: 100%;
+                    padding: 12px;
+                    padding-top: 5px;
+                    font-size: .9rem;
+                    line-height: 1.4rem;
+                    font-family: "Inter", sans-serif;
+                    color:#e9e7e7;
+                    overflow-y: scroll;
+                    scrollbar-width: none;
+                }
+                p::-webkit-scrollbar{
+                    display: none;
+                }
+            }
+            .ch_container:hover{
+                background-color: var(--color2);
+            }
+            @media screen and (max-width: 600px) {
+                .ch_container{
+                    height: 110px;
+                    width: 230px;
+                }
+            }
+        </style>
+
+        <div class="ch_container">
+            <h3></h3>
+            <p>
+               
+            </p>
+        </div>
+        `
+
+        class chooseCustomElement extends HTMLElement{
+
+            constructor(){
+                super();
+                this.shadow = this.attachShadow({mode:"open"});
+            }
+
+            connectedCallback(){
+
+                let clone  = cust_template.content.cloneNode(true);
+                this.shadow.append(clone);
+
+                if(this.hasAttribute("header")){
+                    if(!this.Header){
+                        this.remove();
+                    }
+                    else{
+                        this.Header = this.Header;
+                    } 
+                }
+
+                if(this.hasAttribute("content")){
+                    if(!this.Content){
+                        this.remove();
+                    }
+                    else{
+                        this.Content = this.Content;
+                    } 
+                }
+
+            }
+
+            get Header(){
+                return this.getAttribute("header");
+            }
+
+            set Header(value){
+                let ele = this.shadow.querySelector("h3");
+                if(ele){
+                    ele.textContent=value;
+                }
+            }
+
+            get Content(){
+                return this.getAttribute("content");
+            }
+
+            set Content(value){
+                let ele = this.shadow.querySelector("p");
+                if(ele){
+                    ele.textContent=value;
+                }
+            }
+
+        }
+
+        customElements.define("choose-custom-element",chooseCustomElement);
+    </script>
+    <script>
+        let cate_template = document.createElement("template");
+        cate_template.innerHTML=`
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Rajdhani&display=swap');
+    
+            :root{
+                --color1 :#52a552;
+                --color2 :#424242;
+                --color3 :#818181;
+                --color4 :#ffffff;
+                --color5 :#19857b;
+                --color6 :#303030;
+                --color7 :#656565;
+            }
+    
+    
+            * {
+                padding: 0%;
+                margin: 0%;
+                box-sizing: border-box;
+                font-family: "Josefin Sans", sans-serif;
+            }
+            .cate{
+                width: 100%;
+                height: 44px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                color: white;
+    
+                .name{
+                    text-transform: capitalize;
+                    font-size: 1.4rem;
+                    flex-grow: 1;
+                    padding-inline:8px ;
+                    display: flex;
+                    align-items: center;
+                }
+                .count{
+                    height: 100%;
+                    width: fit-content;
+                    display: flex;
+                    align-items: center;
+                    padding-inline: 6px;
+                }
+            }
+            .cate:hover{
+                background-color: var(--color2);
+                border-left: 4px solid var(--color5);
+            }
+        </style>
+        <div class="cate">
+            <div class="name">
+                All
+            </div>
+            <div class="count">
+                45343
+            </div>
+        </div>
+    </div>
+        `
+
+        class cateCustomElement extends HTMLElement{
+
+            constructor(){
+                super();
+                this.shadow = this.attachShadow({mode:"closed"});
+            }
+
+           
+            connectedCallback(){
+
+                let clone  = cate_template.content.cloneNode(true);
+                this.shadow.append(clone);
+
+                if(this.hasAttribute("name")){
+                    if(!this.Name){
+                        this.remove();
+                    }
+                    else{
+                        this.Name= this.Name;
+                    } 
+                }
+
+                if(this.hasAttribute("count")){
+                    if(!this.Count){
+                        this.remove();
+                    }
+                    else{
+                        this.Count = this.Count;
+                    } 
+                }
+
+            }
+
+            get Name(){
+                return this.getAttribute("name");
+            }
+
+            set Name(value){
+                let ele = this.shadow.querySelector(".name");
+                if(ele){
+                    ele.textContent=value;
+                }
+            }
+
+            get Count(){
+                return this.getAttribute("count");
+            }
+
+            set Count(value){
+                let ele = this.shadow.querySelector(".count");
+                if(ele){
+                    ele.textContent=value;
+                }
+            }
+
+        }
+
+        customElements.define("category-custom-element",cateCustomElement);
+
+
+    </script>
+
+</body>
+
+</html>
